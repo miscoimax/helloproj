@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SocialNetworkDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="address_id" />
+    </Key>
+    <Property Name="address_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="profile_id" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="postal_code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="country_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Address_ToCountry" FromRole="Address" ToRole="Countries" />
+    <NavigationProperty Name="Profile" Relationship="Self.FK_Address_ToProfile" FromRole="Address" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="comment_id" />
+    </Key>
+    <Property Name="comment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="picture_id" Type="Int32" Nullable="false" />
+    <Property Name="profile_id" Type="Int32" Nullable="false" />
+    <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="read" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Picture" Relationship="Self.FK_Comments_ToPicture" FromRole="Comments" ToRole="Pictures" />
+    <NavigationProperty Name="Profile" Relationship="Self.FK_Comments_ToProfile" FromRole="Comments" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="Comments_Like">
+    <Key>
+      <PropertyRef Name="comment_id" />
+    </Key>
+    <Property Name="comment_id" Type="Int32" Nullable="false" />
+    <Property Name="profile_id" Type="Int32" Nullable="false" />
+    <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="read" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Profile" Relationship="Self.FK_Comments_Like_ToProfile" FromRole="Comments_Like" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="country_id" />
+    </Key>
+    <Property Name="country_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="country_code" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="country_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_ToCountry" FromRole="Countries" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="FriendLink">
+    <Key>
+      <PropertyRef Name="requester" />
+      <PropertyRef Name="requested" />
+    </Key>
+    <Property Name="requester" Type="Int32" Nullable="false" />
+    <Property Name="requested" Type="Int32" Nullable="false" />
+    <Property Name="best_friend" Type="Boolean" Nullable="false" />
+    <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="read" Type="Boolean" Nullable="false" />
+    <Property Name="approved" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Requester" Relationship="Self.FK_FriendLink_ToProfile_1" FromRole="FriendLink" ToRole="Profile" />
+    <NavigationProperty Name="Requested" Relationship="Self.FK_FriendLink_ToProfile_2" FromRole="FriendLink" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="Like">
+    <Key>
+      <PropertyRef Name="picture_id" />
+      <PropertyRef Name="profile_id" />
+    </Key>
+    <Property Name="picture_id" Type="Int32" Nullable="false" />
+    <Property Name="profile_id" Type="Int32" Nullable="false" />
+    <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="read" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Picture" Relationship="Self.FK_Likes_ToPicture" FromRole="Likes" ToRole="Pictures" />
+    <NavigationProperty Name="Profile" Relationship="Self.FK_Likes_ToProfile" FromRole="Likes" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="message_id" />
+    </Key>
+    <Property Name="message_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sender" Type="Int32" Nullable="false" />
+    <Property Name="receiver" Type="Int32" Nullable="false" />
+    <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="read" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Receiver" Relationship="Self.FK_Message_ToProfile_Receiver" FromRole="Message" ToRole="Profile" />
+    <NavigationProperty Name="Sender" Relationship="Self.FK_Message_ToProfile_Sender" FromRole="Message" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="Picture">
+    <Key>
+      <PropertyRef Name="picture_id" />
+    </Key>
+    <Property Name="picture_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="profile_id" Type="Int32" Nullable="false" />
+    <Property Name="picture_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="caption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_ToPicture" FromRole="Pictures" ToRole="Comments" />
+    <NavigationProperty Name="Likes" Relationship="Self.FK_Likes_ToPicture" FromRole="Pictures" ToRole="Likes" />
+    <NavigationProperty Name="Profile" Relationship="Self.FK_Pictures_ToProfile" FromRole="Pictures" ToRole="Profile" />
+    <NavigationProperty Name="Profiles" Relationship="Self.FK_Profile_ToPicture" FromRole="Pictures" ToRole="Profile" />
+    <NavigationProperty Name="Tags" Relationship="Self.FK_Tag_Pictures" FromRole="Pictures" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="Profile">
+    <Key>
+      <PropertyRef Name="profile_id" />
+    </Key>
+    <Property Name="profile_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="profile_picture" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="role" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="website" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="private" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_ToProfile" FromRole="Profile" ToRole="Address" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_ToProfile" FromRole="Profile" ToRole="Comments" />
+    <NavigationProperty Name="Comments_Like" Relationship="Self.FK_Comments_Like_ToProfile" FromRole="Profile" ToRole="Comments_Like" />
+    <NavigationProperty Name="FriendLinks_Requester" Relationship="Self.FK_FriendLink_ToProfile_1" FromRole="Profile" ToRole="FriendLink" />
+    <NavigationProperty Name="FriendLinks_Requested" Relationship="Self.FK_FriendLink_ToProfile_2" FromRole="Profile" ToRole="FriendLink" />
+    <NavigationProperty Name="Likes" Relationship="Self.FK_Likes_ToProfile" FromRole="Profile" ToRole="Likes" />
+    <NavigationProperty Name="Messages_Receiver" Relationship="Self.FK_Message_ToProfile_Receiver" FromRole="Profile" ToRole="Message" />
+    <NavigationProperty Name="Messages_Sender" Relationship="Self.FK_Message_ToProfile_Sender" FromRole="Profile" ToRole="Message" />
+    <NavigationProperty Name="Pictures" Relationship="Self.FK_Pictures_ToProfile" FromRole="Profile" ToRole="Pictures" />
+    <NavigationProperty Name="Picture" Relationship="Self.FK_Profile_ToPicture" FromRole="Profile" ToRole="Pictures" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Profile_ToUser" FromRole="Profile" ToRole="User" />
+    <NavigationProperty Name="Tagged" Relationship="Self.FK_Tag_ToProfile_Tagged" FromRole="Profile" ToRole="Tag" />
+    <NavigationProperty Name="Tagger" Relationship="Self.FK_Tag_ToProfile_Tagger" FromRole="Profile" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="picture_id" />
+      <PropertyRef Name="tagger" />
+      <PropertyRef Name="tagged" />
+    </Key>
+    <Property Name="picture_id" Type="Int32" Nullable="false" />
+    <Property Name="tagger" Type="Int32" Nullable="false" />
+    <Property Name="tagged" Type="Int32" Nullable="false" />
+    <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="read" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Picture" Relationship="Self.FK_Tag_Pictures" FromRole="Tag" ToRole="Pictures" />
+    <NavigationProperty Name="Tagged" Relationship="Self.FK_Tag_ToProfile_Tagged" FromRole="Tag" ToRole="Profile" />
+    <NavigationProperty Name="Tagger" Relationship="Self.FK_Tag_ToProfile_Tagger" FromRole="Tag" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password_hash" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Profiles" Relationship="Self.FK_Profile_ToUser" FromRole="User" ToRole="Profile" />
+  </EntityType>
+  <Association Name="FK_Address_ToCountry">
+    <End Role="Countries" Type="Self.Country" Multiplicity="1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="country_id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="country_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_ToProfile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="profile_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_ToPicture">
+    <End Role="Pictures" Type="Self.Picture" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pictures">
+        <PropertyRef Name="picture_id" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="picture_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_ToProfile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="profile_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Like_ToProfile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="Comments_Like" Type="Self.Comments_Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="Comments_Like">
+        <PropertyRef Name="profile_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FriendLink_ToProfile_1">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="FriendLink" Type="Self.FriendLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="FriendLink">
+        <PropertyRef Name="requester" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FriendLink_ToProfile_2">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="FriendLink" Type="Self.FriendLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="FriendLink">
+        <PropertyRef Name="requested" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Likes_ToPicture">
+    <End Role="Pictures" Type="Self.Picture" Multiplicity="1" />
+    <End Role="Likes" Type="Self.Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pictures">
+        <PropertyRef Name="picture_id" />
+      </Principal>
+      <Dependent Role="Likes">
+        <PropertyRef Name="picture_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Likes_ToProfile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="Likes" Type="Self.Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="Likes">
+        <PropertyRef Name="profile_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Message_ToProfile_Receiver">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="Message" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="receiver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Message_ToProfile_Sender">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="Message" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="sender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pictures_ToProfile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="Pictures" Type="Self.Picture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="Pictures">
+        <PropertyRef Name="profile_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profile_ToPicture">
+    <End Role="Pictures" Type="Self.Picture" Multiplicity="0..1" />
+    <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pictures">
+        <PropertyRef Name="picture_id" />
+      </Principal>
+      <Dependent Role="Profile">
+        <PropertyRef Name="profile_picture" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tag_Pictures">
+    <End Role="Pictures" Type="Self.Picture" Multiplicity="1" />
+    <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pictures">
+        <PropertyRef Name="picture_id" />
+      </Principal>
+      <Dependent Role="Tag">
+        <PropertyRef Name="picture_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profile_ToUser">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Profile">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tag_ToProfile_Tagged">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="Tag">
+        <PropertyRef Name="tagged" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tag_ToProfile_Tagger">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="Tag">
+        <PropertyRef Name="tagger" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SocialNetworkDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Addresses" EntityType="Self.Address" />
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="Comments_Like" EntityType="Self.Comments_Like" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="FriendLinks" EntityType="Self.FriendLink" />
+    <EntitySet Name="Likes" EntityType="Self.Like" />
+    <EntitySet Name="Messages" EntityType="Self.Message" />
+    <EntitySet Name="Pictures" EntityType="Self.Picture" />
+    <EntitySet Name="Profiles" EntityType="Self.Profile" />
+    <EntitySet Name="Tags" EntityType="Self.Tag" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Address_ToCountry" Association="Self.FK_Address_ToCountry">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_ToProfile" Association="Self.FK_Address_ToProfile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_ToPicture" Association="Self.FK_Comments_ToPicture">
+      <End Role="Pictures" EntitySet="Pictures" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_ToProfile" Association="Self.FK_Comments_ToProfile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Like_ToProfile" Association="Self.FK_Comments_Like_ToProfile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Comments_Like" EntitySet="Comments_Like" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FriendLink_ToProfile_1" Association="Self.FK_FriendLink_ToProfile_1">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="FriendLink" EntitySet="FriendLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FriendLink_ToProfile_2" Association="Self.FK_FriendLink_ToProfile_2">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="FriendLink" EntitySet="FriendLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Likes_ToPicture" Association="Self.FK_Likes_ToPicture">
+      <End Role="Pictures" EntitySet="Pictures" />
+      <End Role="Likes" EntitySet="Likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Likes_ToProfile" Association="Self.FK_Likes_ToProfile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Likes" EntitySet="Likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Message_ToProfile_Receiver" Association="Self.FK_Message_ToProfile_Receiver">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Message_ToProfile_Sender" Association="Self.FK_Message_ToProfile_Sender">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pictures_ToProfile" Association="Self.FK_Pictures_ToProfile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Pictures" EntitySet="Pictures" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profile_ToPicture" Association="Self.FK_Profile_ToPicture">
+      <End Role="Pictures" EntitySet="Pictures" />
+      <End Role="Profile" EntitySet="Profiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tag_Pictures" Association="Self.FK_Tag_Pictures">
+      <End Role="Pictures" EntitySet="Pictures" />
+      <End Role="Tag" EntitySet="Tags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profile_ToUser" Association="Self.FK_Profile_ToUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Profile" EntitySet="Profiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tag_ToProfile_Tagged" Association="Self.FK_Tag_ToProfile_Tagged">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Tag" EntitySet="Tags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tag_ToProfile_Tagger" Association="Self.FK_Tag_ToProfile_Tagger">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Tag" EntitySet="Tags" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
