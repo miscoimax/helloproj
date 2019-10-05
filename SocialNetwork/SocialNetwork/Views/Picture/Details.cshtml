@@ -1,0 +1,35 @@
+﻿@model SocialNetwork.Models.Picture
+
+<div>
+    <h3>Picture</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.caption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.caption)
+        </dd>
+
+        <dt>
+            Picture
+        </dt>
+
+        <dd>
+            <img src="@Url.Content(Model.picture_path)" style="width: 150px; height: 150px; overflow: hidden;" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.picture_id }) |
+    @Html.ActionLink("Back to List", "Index", new { id = Model.ProfileId })
+</p>

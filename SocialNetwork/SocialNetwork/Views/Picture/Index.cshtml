@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SocialNetwork.Models.Picture>
+
+@{ 
+    ViewBag.Title = "Pictures";
+}
+
+<h3>Pictures of @ViewBag.username</h3>
+<p>
+    @Html.ActionLink("Back to Profile List", "Index", "Home") | 
+    @Html.ActionLink("Create New", "Create", new { id = ViewBag.id })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.caption)
+        </th>
+        <th>
+            Picture
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.location)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.caption)
+        </td>
+        <td>
+            <img src="@Url.Content(item.picture_path)" style="width: 150px; height: 150px; overflow: hidden;" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.location)
+        </td>
+        <td>
+        @if (item.picture_id != item.Profile.profile_picture)
+        {
+            @Html.ActionLink("Select as profile picture", "SetProfilePicture", new { id = item.picture_id })
+        }
+        else
+        {
+            <a style="text-decoration:none; color:black;">Selected as profile picture</a>
+        } |
+
+            @Html.ActionLink("Edit", "Edit", new { id = item.picture_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.picture_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.picture_id })
+        </td>
+    </tr>
+}
+
+
+</table>

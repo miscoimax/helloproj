@@ -1,0 +1,56 @@
+﻿@model SocialNetwork.Models.Picture
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Picture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.caption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.caption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.picture_path)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.picture_path)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Profile.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Profile.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index", new { id = ViewBag.id })
+        </div>
+    }
+</div>

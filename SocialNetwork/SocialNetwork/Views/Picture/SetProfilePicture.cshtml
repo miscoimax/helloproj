@@ -1,0 +1,19 @@
+﻿@model SocialNetwork.Models.Picture
+
+@{
+    ViewBag.Title = "SetProfilePicture";
+}
+
+<h2>Set Profile Picture</h2>
+
+@Html.Action("Details", "Home", new { id = ViewBag.id })
+
+@Html.Action("Details", "Picture", new { id = Model.picture_id })
+
+<p>Are you sure you want to set this as the new picture?</p>
+
+<form action="" method="post">
+    <button type="submit" name="profileId" value="@ViewBag.id">Save Changes</button>
+</form>
+
+<div>@Html.ActionLink("Back to List", "Index")</div>
