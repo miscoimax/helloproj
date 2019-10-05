@@ -21,7 +21,7 @@ namespace SocialNetwork.Models
         public bool read { get; set; }
     
         public virtual Picture Picture { get; set; }
-        public virtual Profile Tagged { get; set; }
-        public virtual Profile Tagger { get; set; }
+        public virtual Profile Tagged_Profile { get; set; }
+        public virtual Profile Tagger_Profile { get; set; }
     }
 }

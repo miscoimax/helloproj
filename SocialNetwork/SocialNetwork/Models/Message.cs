@@ -21,7 +21,7 @@ namespace SocialNetwork.Models
         public System.DateTime timestamp { get; set; }
         public bool read { get; set; }
     
-        public virtual Profile Receiver { get; set; }
-        public virtual Profile Sender { get; set; }
+        public virtual Profile Receiver_Profile { get; set; }
+        public virtual Profile Sender_Profile { get; set; }
     }
 }

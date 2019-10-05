@@ -10,24 +10,26 @@ namespace SocialNetwork.Controllers
     {
         Models.SocialNetworkDBEntities db = new Models.SocialNetworkDBEntities();
         // GET: Profile
-        public ActionResult Index(int id) //user ID
+        public ActionResult Index() //user ID
         {
-            ViewBag.id = id;
-            return View(GetProfiles(id));
+            if (Session["user_id"] == null)
+                return RedirectToAction("Index", "Login");
+            return View(GetProfiles(int.Parse(Session["user_id"].ToString())));
         }
 
         // GET: Profile/Details/5
         public ActionResult Details(int id)
         {
-            var theProfile = GetProfile(id);
-            ViewBag.id = theProfile.user_id;
-            return View(theProfile);
+            if (Session["user_id"] == null)
+                return RedirectToAction("Index", "Login");
+            return View(GetProfile(id));
         }
 
         // GET: Profile/Create
-        public ActionResult Create(int id) //user ID
+        public ActionResult Create() //user ID
         {
-            ViewBag.Id = id;
+            if (Session["user_id"] == null)
+                return RedirectToAction("Index", "Login");
             return View();
         }
 
@@ -35,6 +37,8 @@ namespace SocialNetwork.Controllers
         [HttpPost]
         public ActionResult Create(int id, FormCollection collection)
         {
+            if (Session["user_id"] == null)
+                return RedirectToAction("Index", "Login");
             try
             {
                 Models.Profile newProfile = new Models.Profile()
@@ -63,15 +67,17 @@ namespace SocialNetwork.Controllers
         // GET: Profile/Edit/5
         public ActionResult Edit(int id)
         {
-            var theProfile = GetProfile(id);
-            ViewBag.id = theProfile.user_id;
-            return View(theProfile);
+            if (Session["user_id"] == null)
+                return RedirectToAction("Index", "Login");
+            return View(GetProfile(id));
         }
 
         // POST: Profile/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
+            if (Session["user_id"] == null)
+                return RedirectToAction("Index", "Login");
             try
             {
                 Models.Profile theProfile = GetProfile(id);
@@ -97,16 +103,31 @@ namespace SocialNetwork.Controllers
         // GET: Profile/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            if (Session["user_id"] == null)
+                return RedirectToAction("Index", "Login");
+            return View(GetProfile(id));
         }
 
         // POST: Profile/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+            if (Session["user_id"] == null)
+                return RedirectToAction("Index", "Login");
             try
             {
-                // TODO: Add delete logic here
+                var theProfile = GetProfile(id);
+                db.Addresses.RemoveRange(theProfile.Addresses);
+                db.Comments.RemoveRange(theProfile.Comments);
+                db.Comments_Like.RemoveRange(theProfile.Comments_Like);
+                db.FriendLinks.RemoveRange(theProfile.FriendLinks_Requester);
+                db.Likes.RemoveRange(theProfile.Likes);
+                db.Messages.RemoveRange(theProfile.Messages_Sender);
+                db.Pictures.RemoveRange(theProfile.Pictures);
+                db.Tags.RemoveRange(theProfile.Tags_Tagger);
+
+                db.Profiles.Remove(theProfile);
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
             }

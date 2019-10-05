@@ -26,8 +26,8 @@ namespace SocialNetwork.Models
             this.Messages_Receiver = new HashSet<Message>();
             this.Messages_Sender = new HashSet<Message>();
             this.Pictures = new HashSet<Picture>();
-            this.Tagged = new HashSet<Tag>();
-            this.Tagger = new HashSet<Tag>();
+            this.Tags_Tagged = new HashSet<Tag>();
+            this.Tags_Tagger = new HashSet<Tag>();
         }
     
         public int profile_id { get; set; }
@@ -63,8 +63,8 @@ namespace SocialNetwork.Models
         public virtual Picture Picture { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tag> Tagged { get; set; }
+        public virtual ICollection<Tag> Tags_Tagged { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tag> Tagger { get; set; }
+        public virtual ICollection<Tag> Tags_Tagger { get; set; }
     }
 }

@@ -12,12 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.user_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.profile_picture)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
@@ -42,18 +36,16 @@
             @Html.DisplayNameFor(model => model.@private)
         </th>
         <th>
-            Actions
+            @Html.DisplayNameFor(model => model.Picture.picture_path)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.username)
+        </th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.user_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.profile_picture)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.name)
         </td>
@@ -79,9 +71,15 @@
             @Html.DisplayFor(modelItem => item.@private)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Picture.picture_path)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.username)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.profile_id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.profile_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.profile_id })
+            @Html.ActionLink("Details", "Details", new { id=item.profile_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.profile_id })
         </td>
     </tr>
 }

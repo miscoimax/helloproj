@@ -58,8 +58,8 @@
     <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="read" Type="Boolean" Nullable="false" />
     <Property Name="approved" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Requester" Relationship="Self.FK_FriendLink_ToProfile_1" FromRole="FriendLink" ToRole="Profile" />
-    <NavigationProperty Name="Requested" Relationship="Self.FK_FriendLink_ToProfile_2" FromRole="FriendLink" ToRole="Profile" />
+    <NavigationProperty Name="Requester_Profile" Relationship="Self.FK_FriendLink_ToProfile_1" FromRole="FriendLink" ToRole="Profile" />
+    <NavigationProperty Name="Requested_Profile" Relationship="Self.FK_FriendLink_ToProfile_2" FromRole="FriendLink" ToRole="Profile" />
   </EntityType>
   <EntityType Name="Like">
     <Key>
@@ -83,8 +83,8 @@
     <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="read" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Receiver" Relationship="Self.FK_Message_ToProfile_Receiver" FromRole="Message" ToRole="Profile" />
-    <NavigationProperty Name="Sender" Relationship="Self.FK_Message_ToProfile_Sender" FromRole="Message" ToRole="Profile" />
+    <NavigationProperty Name="Receiver_Profile" Relationship="Self.FK_Message_ToProfile_Receiver" FromRole="Message" ToRole="Profile" />
+    <NavigationProperty Name="Sender_Profile" Relationship="Self.FK_Message_ToProfile_Sender" FromRole="Message" ToRole="Profile" />
   </EntityType>
   <EntityType Name="Picture">
     <Key>
@@ -127,8 +127,8 @@
     <NavigationProperty Name="Pictures" Relationship="Self.FK_Pictures_ToProfile" FromRole="Profile" ToRole="Pictures" />
     <NavigationProperty Name="Picture" Relationship="Self.FK_Profile_ToPicture" FromRole="Profile" ToRole="Pictures" />
     <NavigationProperty Name="User" Relationship="Self.FK_Profile_ToUser" FromRole="Profile" ToRole="User" />
-    <NavigationProperty Name="Tagged" Relationship="Self.FK_Tag_ToProfile_Tagged" FromRole="Profile" ToRole="Tag" />
-    <NavigationProperty Name="Tagger" Relationship="Self.FK_Tag_ToProfile_Tagger" FromRole="Profile" ToRole="Tag" />
+    <NavigationProperty Name="Tags_Tagged" Relationship="Self.FK_Tag_ToProfile_Tagged" FromRole="Profile" ToRole="Tag" />
+    <NavigationProperty Name="Tags_Tagger" Relationship="Self.FK_Tag_ToProfile_Tagger" FromRole="Profile" ToRole="Tag" />
   </EntityType>
   <EntityType Name="Tag">
     <Key>
@@ -142,8 +142,8 @@
     <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="read" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Picture" Relationship="Self.FK_Tag_Pictures" FromRole="Tag" ToRole="Pictures" />
-    <NavigationProperty Name="Tagged" Relationship="Self.FK_Tag_ToProfile_Tagged" FromRole="Tag" ToRole="Profile" />
-    <NavigationProperty Name="Tagger" Relationship="Self.FK_Tag_ToProfile_Tagger" FromRole="Tag" ToRole="Profile" />
+    <NavigationProperty Name="Tagged_Profile" Relationship="Self.FK_Tag_ToProfile_Tagged" FromRole="Tag" ToRole="Profile" />
+    <NavigationProperty Name="Tagger_Profile" Relationship="Self.FK_Tag_ToProfile_Tagger" FromRole="Tag" ToRole="Profile" />
   </EntityType>
   <EntityType Name="User">
     <Key>
