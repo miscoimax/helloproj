@@ -35,12 +35,12 @@ namespace SocialNetwork.Controllers
 
         // POST: Profile/Create
         [HttpPost]
-        public ActionResult Create(int id, FormCollection collection)
+        public ActionResult Create(FormCollection collection)
         {
             if (Session["user_id"] == null)
                 return RedirectToAction("Index", "Login");
-            try
-            {
+            //try
+            //{
                 Models.Profile newProfile = new Models.Profile()
                 {
                     name = collection["name"],
@@ -49,19 +49,20 @@ namespace SocialNetwork.Controllers
                     phone = collection["phone"],
                     gender = collection["gender"],
                     role = collection["role"],
-                    @private = bool.Parse(collection["private"]),
-                    user_id = id
+                    website = collection["website"],
+                    isPrivate = bool.Parse(collection["isPrivate"]),
+                    user_id = int.Parse(Session["user_id"].ToString())
                 };
 
                 db.Profiles.Add(newProfile);
                 db.SaveChanges();
 
-                return RedirectToAction("Index", new { id = id });
-            }
-            catch
+                return RedirectToAction("Index", new { id = newProfile.user_id });
+            //}
+            /*catch
             {
                 return Content("Profile creation got messed up, sorry...");
-            }
+            }*/
         }
 
         // GET: Profile/Edit/5
@@ -69,7 +70,8 @@ namespace SocialNetwork.Controllers
         {
             if (Session["user_id"] == null)
                 return RedirectToAction("Index", "Login");
-            return View(GetProfile(id));
+            var theProfile = GetProfile(id);
+            return View(theProfile);
         }
 
         // POST: Profile/Edit/5
@@ -88,7 +90,7 @@ namespace SocialNetwork.Controllers
                 theProfile.phone = collection["phone"];
                 theProfile.gender = collection["gender"];
                 theProfile.role = collection["role"];
-                theProfile.@private = bool.Parse(collection["private"]);
+                theProfile.isPrivate = bool.Parse(collection["private"]);
 
                 db.SaveChanges();
 

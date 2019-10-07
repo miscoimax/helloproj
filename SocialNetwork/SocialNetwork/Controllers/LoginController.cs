@@ -32,7 +32,7 @@ namespace SocialNetwork.Controllers
                 {
                     Session["user_id"] = theUser.user_id;//must
                     Session["username"] = theUser.username;
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Profile");
                 }
                 return RedirectToAction("Index");
             }

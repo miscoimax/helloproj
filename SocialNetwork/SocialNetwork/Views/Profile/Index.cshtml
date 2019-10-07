@@ -33,15 +33,12 @@
             @Html.DisplayNameFor(model => model.gender)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.@private)
+            @Html.DisplayNameFor(model => model.isPrivate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Picture.picture_path)
+            Profile Picture
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.username)
-        </th>
-        <th></th>
+        <th>Actions</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -68,13 +65,10 @@
             @Html.DisplayFor(modelItem => item.gender)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.@private)
+            @Html.DisplayFor(modelItem => item.isPrivate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Picture.picture_path)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.username)
+            <img src="@Url.Content(item.Picture.picture_path)" />
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.profile_id }) |

@@ -68,29 +68,20 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.@private)
+            @Html.DisplayNameFor(model => model.isPrivate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.@private)
+            @Html.DisplayFor(model => model.isPrivate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Picture.picture_path)
+            Profile Picture
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Picture.picture_path)
+            <img src="@Url.Content(Model.Picture.picture_path)" />
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.username)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {

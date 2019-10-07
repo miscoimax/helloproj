@@ -17,11 +17,11 @@ namespace SocialNetwork.Models
         public int message_id { get; set; }
         public int sender { get; set; }
         public int receiver { get; set; }
-        public string message { get; set; }
+        public string message1 { get; set; }
         public System.DateTime timestamp { get; set; }
         public bool read { get; set; }
     
-        public virtual Profile Receiver_Profile { get; set; }
-        public virtual Profile Sender_Profile { get; set; }
+        public virtual Profile Profile_Receiver { get; set; }
+        public virtual Profile Profile_Sender { get; set; }
     }
 }

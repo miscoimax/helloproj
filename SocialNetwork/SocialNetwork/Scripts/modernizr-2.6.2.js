@@ -1082,7 +1082,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
       /**
        * Creates a style sheet with the given CSS text and adds it to the document.
-       * @private
+       * isPrivate
        * @param {Document} ownerDocument The document.
        * @param {String} cssText The CSS text.
        * @returns {StyleSheet} The style element.
@@ -1097,7 +1097,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
       /**
        * Returns the value of `html5.elements` as an array.
-       * @private
+       * isPrivate
        * @returns {Array} An array of shived element node names.
        */
       function getElements() {
@@ -1107,7 +1107,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
         /**
        * Returns the data associated to the given document
-       * @private
+       * isPrivate
        * @param {Document} ownerDocument The document.
        * @returns {Object} An object of data.
        */
@@ -1185,7 +1185,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
       /**
        * Shivs the `createElement` and `createDocumentFragment` methods of the document.
-       * @private
+       * isPrivate
        * @param {Document|DocumentFragment} ownerDocument The document.
        * @param {Object} data of the document.
        */

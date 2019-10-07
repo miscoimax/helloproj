@@ -23,7 +23,7 @@
     <Property Name="picture_id" Type="Int32" Nullable="false" />
     <Property Name="profile_id" Type="Int32" Nullable="false" />
     <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="read" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Picture" Relationship="Self.FK_Comments_ToPicture" FromRole="Comments" ToRole="Pictures" />
     <NavigationProperty Name="Profile" Relationship="Self.FK_Comments_ToProfile" FromRole="Comments" ToRole="Profile" />
@@ -58,8 +58,8 @@
     <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="read" Type="Boolean" Nullable="false" />
     <Property Name="approved" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Requester_Profile" Relationship="Self.FK_FriendLink_ToProfile_1" FromRole="FriendLink" ToRole="Profile" />
-    <NavigationProperty Name="Requested_Profile" Relationship="Self.FK_FriendLink_ToProfile_2" FromRole="FriendLink" ToRole="Profile" />
+    <NavigationProperty Name="Profile_Requester" Relationship="Self.FK_FriendLink_ToProfile_1" FromRole="FriendLink" ToRole="Profile" />
+    <NavigationProperty Name="Profile_Requested" Relationship="Self.FK_FriendLink_ToProfile_2" FromRole="FriendLink" ToRole="Profile" />
   </EntityType>
   <EntityType Name="Like">
     <Key>
@@ -80,11 +80,11 @@
     <Property Name="message_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="sender" Type="Int32" Nullable="false" />
     <Property Name="receiver" Type="Int32" Nullable="false" />
-    <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="message1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="read" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Receiver_Profile" Relationship="Self.FK_Message_ToProfile_Receiver" FromRole="Message" ToRole="Profile" />
-    <NavigationProperty Name="Sender_Profile" Relationship="Self.FK_Message_ToProfile_Sender" FromRole="Message" ToRole="Profile" />
+    <NavigationProperty Name="Profile_Receiver" Relationship="Self.FK_Message_ToProfile_Receiver" FromRole="Message" ToRole="Profile" />
+    <NavigationProperty Name="Profile_Sender" Relationship="Self.FK_Message_ToProfile_Sender" FromRole="Message" ToRole="Profile" />
   </EntityType>
   <EntityType Name="Picture">
     <Key>
@@ -115,7 +115,7 @@
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
     <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-    <Property Name="private" Type="Boolean" Nullable="false" />
+    <Property Name="isPrivate" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_ToProfile" FromRole="Profile" ToRole="Address" />
     <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_ToProfile" FromRole="Profile" ToRole="Comments" />
     <NavigationProperty Name="Comments_Like" Relationship="Self.FK_Comments_Like_ToProfile" FromRole="Profile" ToRole="Comments_Like" />
@@ -142,8 +142,8 @@
     <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="read" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Picture" Relationship="Self.FK_Tag_Pictures" FromRole="Tag" ToRole="Pictures" />
-    <NavigationProperty Name="Tagged_Profile" Relationship="Self.FK_Tag_ToProfile_Tagged" FromRole="Tag" ToRole="Profile" />
-    <NavigationProperty Name="Tagger_Profile" Relationship="Self.FK_Tag_ToProfile_Tagger" FromRole="Tag" ToRole="Profile" />
+    <NavigationProperty Name="Profile_Tagged" Relationship="Self.FK_Tag_ToProfile_Tagged" FromRole="Tag" ToRole="Profile" />
+    <NavigationProperty Name="Profile_Tagger" Relationship="Self.FK_Tag_ToProfile_Tagger" FromRole="Tag" ToRole="Profile" />
   </EntityType>
   <EntityType Name="User">
     <Key>

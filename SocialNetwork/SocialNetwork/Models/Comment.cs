@@ -18,7 +18,7 @@ namespace SocialNetwork.Models
         public int picture_id { get; set; }
         public int profile_id { get; set; }
         public System.DateTime timestamp { get; set; }
-        public string comment { get; set; }
+        public string comment1 { get; set; }
         public bool read { get; set; }
     
         public virtual Picture Picture { get; set; }

@@ -22,7 +22,7 @@
           <ScalarProperty Name="picture_id" ColumnName="picture_id" />
           <ScalarProperty Name="profile_id" ColumnName="profile_id" />
           <ScalarProperty Name="timestamp" ColumnName="timestamp" />
-          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="comment1" ColumnName="comment" />
           <ScalarProperty Name="read" ColumnName="read" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -74,7 +74,7 @@
           <ScalarProperty Name="message_id" ColumnName="message_id" />
           <ScalarProperty Name="sender" ColumnName="sender" />
           <ScalarProperty Name="receiver" ColumnName="receiver" />
-          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="message1" ColumnName="message" />
           <ScalarProperty Name="timestamp" ColumnName="timestamp" />
           <ScalarProperty Name="read" ColumnName="read" />
         </MappingFragment>
@@ -104,7 +104,7 @@
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="phone" ColumnName="phone" />
           <ScalarProperty Name="gender" ColumnName="gender" />
-          <ScalarProperty Name="private" ColumnName="private" />
+          <ScalarProperty Name="isPrivate" ColumnName="isPrivate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

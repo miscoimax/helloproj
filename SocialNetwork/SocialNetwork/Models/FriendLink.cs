@@ -21,7 +21,7 @@ namespace SocialNetwork.Models
         public bool read { get; set; }
         public bool approved { get; set; }
     
-        public virtual Profile Requester_Profile { get; set; }
-        public virtual Profile Requested_Profile { get; set; }
+        public virtual Profile Profile_Requester { get; set; }
+        public virtual Profile Profile_Requested { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace SocialNetwork.Models
         public string email { get; set; }
         public string phone { get; set; }
         public string gender { get; set; }
-        public bool @private { get; set; }
+        public bool isPrivate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Address> Addresses { get; set; }

@@ -98,7 +98,7 @@
     <Property Name="email" Type="varchar" MaxLength="50" />
     <Property Name="phone" Type="varchar" MaxLength="12" />
     <Property Name="gender" Type="char" MaxLength="1" />
-    <Property Name="private" Type="bit" Nullable="false" />
+    <Property Name="isPrivate" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Tag">
     <Key>

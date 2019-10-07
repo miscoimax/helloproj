@@ -18,22 +18,6 @@
         @Html.HiddenFor(model => model.profile_id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.user_id, "user_id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("user_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.user_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.profile_picture, "profile_picture", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("profile_picture", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.profile_picture, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
@@ -90,11 +74,11 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.@private, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.isPrivate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.@private)
-                    @Html.ValidationMessageFor(model => model.@private, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.isPrivate)
+                    @Html.ValidationMessageFor(model => model.isPrivate, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
